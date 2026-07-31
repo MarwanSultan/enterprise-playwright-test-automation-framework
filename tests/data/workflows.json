@@ -1,0 +1,52 @@
+[
+  {
+    "id": "home-page",
+    "name": "Home page loads and shows core navigation",
+    "priority": "P1"
+  },
+  {
+    "id": "search-disability-benefits",
+    "name": "Search disability benefits content",
+    "priority": "P1"
+  },
+  {
+    "id": "find-location",
+    "name": "Navigate to Find a VA Location",
+    "priority": "P1"
+  },
+  {
+    "id": "health-care-eligibility",
+    "name": "Open health care eligibility guidance",
+    "priority": "P1"
+  },
+  {
+    "id": "disability-benefits",
+    "name": "Open disability benefits guidance",
+    "priority": "P1"
+  },
+  {
+    "id": "education-benefits",
+    "name": "Open education benefits guidance",
+    "priority": "P1"
+  },
+  {
+    "id": "sign-in-navigation",
+    "name": "Open sign-in related navigation",
+    "priority": "P1"
+  },
+  {
+    "id": "contact-va",
+    "name": "Open contact VA information",
+    "priority": "P2"
+  },
+  {
+    "id": "resources-navigation",
+    "name": "Open resources and support content",
+    "priority": "P2"
+  },
+  {
+    "id": "benefits-navigation",
+    "name": "Open benefits navigation hub",
+    "priority": "P2"
+  }
+]

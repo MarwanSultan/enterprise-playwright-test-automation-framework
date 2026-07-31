@@ -1,0 +1,28 @@
+{
+  "name": "playwright_ci_cd_pipeline",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:ci": "playwright test --reporter=github,line",
+    "test:chromium": "playwright test --project=chromium",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "hooks:install": "git config core.hooksPath .githooks && chmod +x .githooks/pre-commit"
+  },
+  "keywords": [],
+  "author": "Marwan Sultan",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@eslint/js": "^9.14.0",
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.1.2",
+    "@typescript-eslint/eslint-plugin": "^8.35.0",
+    "@typescript-eslint/parser": "^8.35.0",
+    "eslint": "^9.14.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}

@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Best-practice enterprise gate: block risky commits before they reach the repo.
+# Runs local quality checks equivalent to the CI guardrails.
+
+ROOT_DIR="$(git rev-parse --show-toplevel)"
+cd "$ROOT_DIR"
+
+if ! command -v npm >/dev/null 2>&1; then
+  echo "Error: npm is required for pre-commit validation."
+  exit 1
+fi
+
+echo "Running pre-commit lint and type checks..."
+
+npm run lint -- --max-warnings=0
+npm run typecheck
+
+echo "Pre-commit checks passed."
