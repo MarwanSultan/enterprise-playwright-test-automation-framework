@@ -1,113 +1,96 @@
-# Playwright CI/CD Pipeline
+# Playwright CI/CD Automation Framework
 
-Enterprise-grade Playwright automation framework demonstrating modern CI/CD, automated quality gates, and DevSecOps best practices.
+A production-ready browser and API automation framework built with Playwright and TypeScript for validating critical public web experiences at scale. This repository is designed for enterprise-quality regression assurance, security-minded automation, and repeatable CI/CD execution.
 
 ## Overview
 
-This project provides a scalable test automation framework built with Playwright and GitHub Actions to support continuous testing throughout the software delivery lifecycle.
+This project automates end-to-end testing for VA.gov, covering:
 
-### Key Features
+- UI workflow validation
+- API contract checks
+- visual regression verification
+- cross-browser execution
+- secure delivery through CI policy enforcement
 
-- Playwright end-to-end automation
-- GitHub Actions CI/CD pipeline
-- Cross-browser testing (Chromium, Firefox, WebKit)
-- Data-driven testing
-- API and UI test automation
-- Parallel test execution
-- HTML and Allure reporting
-- Screenshots, videos, and traces on failures
-- Configurable environments
-- Enterprise-ready project structure
+The framework follows enterprise software engineering practices: modular test design, reusable fixtures, explicit quality gates, and traceable execution in automation pipelines.
 
-## Technology Stack
+## Architecture
 
-| Technology | Purpose |
-|------------|---------|
-| Playwright | UI & API Automation |
-| TypeScript | Test Development |
-| GitHub Actions | Continuous Integration |
-| Node.js | Runtime |
-| Allure Reports | Test Reporting |
-| Docker | Containerized Execution |
+- src/pages: page object models for common user journeys
+- src/fixtures: shared Playwright fixtures for consistent setup and teardown
+- tests: functional, API, workflow, and visual regression suites
+- .github/workflows: CI pipeline definitions
+- .githooks: local git hooks for developer enforcement
 
-## Project Structure
+## Key capabilities
 
-```text
-playwright_ci_cd_pipeline/
-├── .github/workflows/
-├── tests/
-├── pages/
-├── fixtures/
-├── test-data/
-├── utils/
-├── config/
-├── playwright.config.ts
-└── package.json
-```
+- Page Object Model design for maintainability and scalability
+- Cross-browser coverage across Chromium, Firefox, and WebKit
+- Structured API testing for health, redirect, security, and content validation
+- Visual regression snapshot checks for UI stability
+- CI/CD execution with linting, type validation, and security scanning
+- Local developer guardrails to reduce low-quality changes before commit
 
-## Getting Started
+## Getting started
 
-### Install dependencies
+1. Install dependencies:
+   npm ci
 
-```bash
-npm install
-```
+2. Install Git hooks:
+   npm run hooks:install
 
-### Install Playwright browsers
+3. Run the full suite:
+   npx playwright test
 
-```bash
-npx playwright install
-```
+4. Run a focused browser suite:
+   npx playwright test --project=chromium
 
-### Run all tests
+5. Open the HTML report:
+   npx playwright show-report
 
-```bash
-npx playwright test
-```
+## Useful commands
 
-### View HTML Report
+- npm run lint
+- npm run typecheck
+- npm run test
+- npm run test:ci
+- npm run test:chromium
+- npm run hooks:install
 
-```bash
-npx playwright show-report
-```
+## Quality and security controls
 
-## CI/CD
+This project incorporates layered controls common in Fortune 500 engineering organizations:
 
-The GitHub Actions pipeline automatically:
+- Local pre-commit checks to reduce risk before code reaches the repository
+- CI enforcement for linting and TypeScript validation
+- Dependency vulnerability scanning with GitHub CodeQL
+- Code quality and security analysis with SonarQube
+- Browser and API validation in a repeatable build pipeline
 
-- Installs dependencies
-- Installs Playwright browsers
-- Executes automated tests
-- Publishes test reports
-- Validates pull requests before merge
+## CI/CD pipeline
 
-This aligns with Playwright's recommended CI workflow for GitHub Actions. :contentReference[oaicite:0]{index=0}
+The GitHub Actions workflow runs automated validation on pushes and pull requests and includes:
 
-## Best Practices
+- dependency installation
+- ESLint validation
+- TypeScript validation
+- CodeQL security scanning when configured
+- SonarQube analysis when configured
+- Playwright test execution
+- artifact upload for test and HTML reporting
 
-- Page Object Model (POM)
-- Reusable test utilities
-- Data-driven testing
-- Environment configuration
-- Parallel execution
-- Clean code principles
-- Automated reporting
-- CI/CD quality gates
+## Repository standards
 
-## Future Enhancements
+- Keep test logic readable and deterministic
+- Use fixtures for shared state and teardown consistency
+- Prefer stable selectors and resilient assertions
+- Validate real end-user behavior rather than implementation details
+- Treat security, quality, and observability as first-class engineering concerns
 
-- Accessibility testing
-- Performance testing
-- Visual regression testing
-- Security scanning
-- Docker-based execution
-- Kubernetes deployment
-- Slack and Microsoft Teams notifications
-- AI-assisted test generation
+## Contributing
+
+Contributors should follow the existing repository patterns, keep test coverage meaningful, and validate changes locally before pushing. Security and code-quality gates are designed to help prevent regressions and reduce operational risk.
 
 ## License
 
-MIT License
-
-## Author
-Marwan Sultan
+ISC
