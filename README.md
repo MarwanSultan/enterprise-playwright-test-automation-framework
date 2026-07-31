@@ -94,3 +94,6 @@ Contributors should follow the existing repository patterns, keep test coverage 
 ## License
 
 ISC
+
+## Author
+Marwan Sultan
