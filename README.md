@@ -1,116 +1,146 @@
 # Enterprise Playwright Test Automation Framework
 
-A scalable, enterprise-grade test automation framework built with **Playwright and TypeScript** that demonstrates modern Quality Engineering practices, CI/CD automation, and DevSecOps principles.
-
-This framework is designed to support reliable UI and API validation for mission-critical applications through maintainable automation architecture, continuous testing, and automated quality controls.
+An enterprise-grade test automation framework built with **Playwright, TypeScript, Docker, and CI/CD best practices**. This framework provides a scalable foundation for UI, API, and end-to-end testing with automated quality controls and reporting.
 
 ---
 
-## Overview
+## 🚀 Features
 
-Modern software delivery requires fast feedback, reliable validation, and automated quality enforcement throughout the development lifecycle.
+### Test Automation
 
-This project demonstrates an enterprise automation approach covering:
+* Playwright-based end-to-end testing
+* TypeScript support
+* Cross-browser testing
+* UI and API automation capabilities
+* Data-driven testing support
+* Reusable test fixtures and utilities
 
-- End-to-end UI test automation
-- API validation and contract testing
-- Cross-browser testing
-- Visual regression testing
-- CI/CD pipeline integration
-- Automated reporting and traceability
-- Security and code-quality validation
+### Code Quality & Developer Experience
 
-The framework follows industry best practices used by large-scale engineering organizations, including modular architecture, reusable components, automated quality gates, and repeatable execution pipelines.
+* ESLint for code quality enforcement
+* Prettier for consistent formatting
+* TypeScript validation
+* Husky pre-commit hooks
+* lint-staged validation
+* Commit message standards using Commitlint
+
+### Containerization
+
+* Dockerized test execution
+* Docker Compose support
+* Consistent execution environment across local and CI environments
+
+### CI/CD Ready
+
+* GitHub Actions integration
+* Automated test execution
+* Quality gates
+* Test reporting
+* Artifact collection
+
+### Reporting
+
+* Playwright HTML reports
+* Allure reporting support
+* Test execution artifacts and debugging evidence
 
 ---
 
-# Architecture
+# Technology Stack
+
+| Category                | Technology                 |
+| ----------------------- | -------------------------- |
+| Automation Framework    | Playwright                 |
+| Language                | TypeScript                 |
+| Runtime                 | Node.js                    |
+| Package Manager         | npm                        |
+| Containerization        | Docker                     |
+| Container Orchestration | Docker Compose             |
+| CI/CD                   | GitHub Actions             |
+| Code Quality            | ESLint, Prettier           |
+| Git Hooks               | Husky, lint-staged         |
+| Reporting               | Playwright Reports, Allure |
+
+---
+
+# Project Structure
 
 ```
 enterprise-playwright-test-automation-framework
 │
-├── src/
-│   ├── pages/              # Page Object Models
-│   ├── fixtures/           # Reusable Playwright fixtures
-│   ├── utils/              # Shared utilities and helpers
-│   └── config/             # Environment and framework configuration
+├── .github/
+│   └── workflows/
+│       └── playwright.yml
+│
+├── .husky/
+│   └── pre-commit
+│
+├── docker/
+│   └── Dockerfile
 │
 ├── tests/
-│   ├── ui/                 # End-to-end UI automation
-│   ├── api/                # API validation tests
-│   ├── visual/             # Visual regression testing
-│   └── workflows/          # Business workflow validation
+│   ├── smoke/
+│   ├── regression/
+│   └── api/
 │
-├── .github/
-│   └── workflows/          # CI/CD pipeline definitions
+├── test-data/
 │
-├── .githooks/              # Developer workflow enforcement
+├── playwright-report/
 │
-├── playwright.config.ts    # Playwright configuration
-└── package.json
+├── test-results/
+│
+├── docker-compose.yml
+├── playwright.config.ts
+├── package.json
+├── tsconfig.json
+├── eslint.config.js
+├── prettier.config.js
+└── commitlint.config.cjs
 ```
 
 ---
 
-# Key Capabilities
+# Prerequisites
 
-## Test Automation
+Install:
 
-✅ Playwright-based UI and API automation  
-✅ TypeScript development framework  
-✅ Page Object Model architecture  
-✅ Reusable fixtures and utilities  
-✅ Parallel test execution  
-✅ Cross-browser validation:
+* Node.js (LTS)
+* npm
+* Docker Desktop
+* Git
 
-- Chromium
-- Firefox
-- WebKit
-
----
-
-## API & Functional Validation
-
-The framework supports:
-
-- REST API testing
-- Response validation
-- Contract verification
-- Workflow testing
-- Business rule validation
-- Negative and edge-case testing
-
----
-
-## Visual Quality Assurance
-
-Includes support for:
-
-- Screenshot comparison
-- UI regression detection
-- User interface stability validation
-
----
-
-# Getting Started
-
-## Prerequisites
-
-- Node.js 18+
-- npm
-- Git
-
----
-
-## Install Dependencies
+Verify installations:
 
 ```bash
-npm ci
+node --version
+npm --version
+docker --version
+docker compose version
 ```
 
 ---
 
-## Install Playwright Browsers
+# Installation
+
+Clone the repository:
+
+```bash
+git clone <repository-url>
+```
+
+Navigate to the project:
+
+```bash
+cd enterprise-playwright-test-automation-framework
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Install Playwright browsers:
 
 ```bash
 npx playwright install
@@ -118,108 +148,138 @@ npx playwright install
 
 ---
 
-## Install Git Hooks
+# Running Tests
 
-```bash
-npm run hooks:install
-```
-
----
-
-## Execute Tests
-
-Run the complete automation suite:
+## Run all Playwright tests
 
 ```bash
 npx playwright test
 ```
 
-Run Chromium tests only:
+## Run tests with UI mode
 
 ```bash
-npx playwright test --project=chromium
+npx playwright test --ui
+```
+
+## Run a specific test
+
+```bash
+npx playwright test tests/example.spec.ts
 ```
 
 ---
 
-## View Test Report
+# Running Tests with Docker
+
+Build and execute:
 
 ```bash
-npx playwright show-report
+docker compose up --build
+```
+
+Docker provides a consistent environment containing:
+
+* Node.js
+* Playwright browsers
+* Project dependencies
+* Test execution environment
+
+---
+
+# Code Quality Checks
+
+Run linting:
+
+```bash
+npm run lint
+```
+
+Check formatting:
+
+```bash
+npm run format:check
+```
+
+Validate TypeScript:
+
+```bash
+npm run type-check
 ```
 
 ---
 
-# Developer Commands
+# Git Workflow
 
-| Command | Description |
-|---|---|
-| `npm run lint` | Run ESLint validation |
-| `npm run typecheck` | Validate TypeScript |
-| `npm run test` | Execute test suite |
-| `npm run test:ci` | Execute CI pipeline tests |
-| `npm run test:chromium` | Run Chromium browser tests |
-| `npm run hooks:install` | Configure Git hooks |
+Before every commit, Husky automatically validates:
+
+* ESLint rules
+* Prettier formatting
+* TypeScript compilation
+* Code quality standards
+
+Example commit:
+
+```bash
+git add .
+git commit -m "feat: add login automation"
+```
+
+Commit messages follow Conventional Commit standards:
+
+```
+feat: new functionality
+fix: defect correction
+test: add automation coverage
+docs: documentation updates
+```
 
 ---
 
 # CI/CD Pipeline
 
-The GitHub Actions pipeline provides automated validation on every push and pull request.
+The GitHub Actions pipeline performs:
 
-Pipeline capabilities include:
+1. Dependency installation
+2. Code quality validation
+3. Security checks
+4. Playwright test execution
+5. Test reporting
+6. Artifact publishing
 
-✅ Dependency installation  
-✅ Code linting  
-✅ TypeScript validation  
-✅ Automated Playwright execution  
-✅ Test artifact collection  
-✅ HTML reporting  
-✅ Security scanning integration  
-✅ Code quality analysis  
+Pipeline flow:
 
-The pipeline is designed around continuous testing principles to provide fast feedback and prevent defects from reaching downstream environments.
-
----
-
-# Quality Engineering Practices
-
-This framework incorporates enterprise testing standards:
-
-## Automation Design
-
-- Maintainable Page Object Model architecture
-- Reusable test components
-- Stable selectors and resilient assertions
-- Separation of test data and automation logic
-
-## CI/CD Quality Gates
-
-- Automated validation before merge
-- Pull request checks
-- Repeatable test execution
-- Failure diagnostics through artifacts and reports
-
-## Security & Code Quality
-
-Integrated capabilities include:
-
-- GitHub CodeQL security analysis
-- Dependency vulnerability scanning
-- SonarQube code-quality analysis
-- Automated engineering standards enforcement
+```
+Developer Commit
+        |
+        ↓
+Pre-Commit Validation
+        |
+        ↓
+Pull Request
+        |
+        ↓
+GitHub Actions
+        |
+        ↓
+Automated Tests
+        |
+        ↓
+Reports & Artifacts
+```
 
 ---
 
-# Engineering Principles
+# Best Practices Implemented
 
-This project follows these principles:
-
-- Automate critical user journeys
-- Validate behavior, not implementation details
-- Build reliable and maintainable automation
-- Shift quality left through CI/CD integration
-- Treat security and observability as core engineering practices
+✅ Page Object Model architecture
+✅ Reusable test utilities
+✅ Environment-based configuration
+✅ Automated quality gates
+✅ Containerized execution
+✅ CI/CD integration
+✅ Consistent coding standards
+✅ Scalable enterprise structure
 
 ---
 
@@ -227,35 +287,35 @@ This project follows these principles:
 
 Planned improvements:
 
-- Containerized execution with Docker
-- Kubernetes-based distributed execution
-- Performance testing integration
-- Accessibility testing automation
-- AI-assisted test generation
-- Advanced reporting dashboards
-- Test analytics and quality metrics
+* API contract testing
+* Accessibility testing
+* Performance testing integration
+* Security scanning (SAST/DAST)
+* Parallel execution optimization
+* Cloud test execution support
+* Advanced test analytics dashboards
 
 ---
-
-# Contributing
-
-Contributions should follow the existing framework patterns and maintain:
-
-- Clean coding standards
-- Meaningful test coverage
-- Reliable automation practices
-- Successful local validation before submission
-
----
-
-# License
-
-ISC License
-
----
-
 # Author
 
-**Marwan Sultan**
+**Marwan Sultan**  
+Senior QA Automation Engineer | Test Automation Lead
 
-Senior QA Automation Engineer | Test Automation Lead | Quality Engineering
+Experienced QA Automation Engineer specializing in enterprise test automation, DevSecOps practices, and scalable CI/CD quality frameworks.
+
+Areas of expertise:
+
+- Playwright & TypeScript automation frameworks
+- UI, API, and end-to-end testing strategies
+- CI/CD pipeline automation with GitHub Actions
+- Docker-based test execution environments
+- Automated quality gates and developer workflows
+- Test strategy, framework architecture, and scalable automation solutions
+
+GitHub: https://github.com/MarwanSultan
+
+---
+
+## License
+
+This project is intended for internal testing and automation framework development.

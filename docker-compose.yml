@@ -1,0 +1,12 @@
+services:
+  playwright:
+    container_name: playwright-tests
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    environment:
+      CI: true
+      TEST_ENV: QA
+    volumes:
+      - ./playwright-report:/app/playwright-report
+      - ./test-results:/app/test-results
