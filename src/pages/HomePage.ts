@@ -16,7 +16,7 @@ export class HomePage {
       .filter({ hasNot: this.page.locator("input") })
       .first();
     this.locationLink = this.page
-      .locator("a", { hasText: "Find a VA Location" })
+      .getByRole("link", { name: /find a va location/i })
       .first();
   }
 
@@ -32,7 +32,8 @@ export class HomePage {
   }
 
   async openFindLocation() {
-    await this.locationLink.click();
+    await this.locationLink.click({ force: true });
+    await this.page.waitForLoadState("domcontentloaded").catch(() => undefined);
   }
 
   async search(query: string) {
