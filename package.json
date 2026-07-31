@@ -3,15 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "playwright test",
-    "test:ci": "playwright test --reporter=github,line",
-    "test:chromium": "playwright test --project=chromium",
-    "lint": "eslint .",
-    "typecheck": "tsc --noEmit",
-    "hooks:install": "git config core.hooksPath .githooks && chmod +x .githooks/pre-commit",
-    "prepare": "husky"
-  },
+"scripts": {
+  "validate": "npm run lint && npm run format:check && npm run type-check"
+},
   "lint-staged": {
     "*.{ts,tsx,js}": [
       "eslint --fix",
