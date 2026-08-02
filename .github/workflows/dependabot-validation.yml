@@ -1,0 +1,51 @@
+name: Dependabot Validation
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+
+  validate-dependencies:
+
+    name: Validate Dependency Updates
+
+    runs-on: ubuntu-latest
+
+    if: github.actor == 'dependabot[bot]'
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+
+      - name: Install dependencies
+        run: npm ci
+
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+
+      - name: Run ESLint
+        run: npm run lint
+
+
+      - name: Run TypeScript validation
+        run: npm run type-check
+
+
+      - name: Run Playwright tests
+        run: npm test

@@ -1,0 +1,71 @@
+version: 2
+
+updates:
+
+  # --------------------------------------------------
+  # Node.js / npm dependencies
+  # package.json + package-lock.json
+  # --------------------------------------------------
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+    open-pull-requests-limit: 10
+
+    labels:
+      - "dependencies"
+      - "npm"
+
+    commit-message:
+      prefix: "chore"
+
+    groups:
+      playwright:
+        patterns:
+          - "@playwright/*"
+
+      testing:
+        patterns:
+          - "*test*"
+          - "*jest*"
+          - "*vitest*"
+
+      linting:
+        patterns:
+          - "eslint*"
+          - "prettier*"
+
+
+  # --------------------------------------------------
+  # GitHub Actions workflow updates
+  # .github/workflows/*.yml
+  # --------------------------------------------------
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+    labels:
+      - "dependencies"
+      - "github-actions"
+
+    commit-message:
+      prefix: "ci"
+
+
+  # --------------------------------------------------
+  # Docker image updates
+  # Dockerfile
+  # --------------------------------------------------
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+    labels:
+      - "dependencies"
+      - "docker"
+
+    commit-message:
+      prefix: "docker"
