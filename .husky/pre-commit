@@ -1,8 +1,1 @@
-#!/usr/bin/env sh
-
-echo "🔍 Running enterprise pre-commit validation..."
-
-npm run lint -- --max-warnings=0
-npm run typecheck
-
-echo "✅ Pre-commit checks passed."
+npm test
