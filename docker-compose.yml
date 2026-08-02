@@ -1,0 +1,48 @@
+version: "3.9"
+
+services:
+
+  playwright-tests:
+
+    container_name: enterprise-playwright-tests
+
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    environment:
+      NODE_ENV: test
+      CI: true
+
+    volumes:
+      # Persist test reports
+      - ./playwright-report:/app/playwright-report
+
+      # Persist test results
+      - ./test-results:/app/test-results
+
+      # Persist Allure results if enabled
+      - ./allure-results:/app/allure-results
+
+    command: >
+      sh -c "
+      echo '=====================================' &&
+      echo 'Installing dependencies' &&
+      npm ci &&
+      
+      echo '=====================================' &&
+      echo 'Running ESLint' &&
+      npm run lint &&
+      
+      echo '=====================================' &&
+      echo 'Running TypeScript validation' &&
+      npm run type-check &&
+      
+      echo '=====================================' &&
+      echo 'Running security audit' &&
+      npm audit --audit-level=high &&
+      
+      echo '=====================================' &&
+      echo 'Running Playwright tests' &&
+      npx playwright test
+      "
