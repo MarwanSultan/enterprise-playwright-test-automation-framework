@@ -9,7 +9,8 @@
     "test:chromium": "playwright test --project=chromium",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "hooks:install": "git config core.hooksPath .githooks && chmod +x .githooks/pre-commit"
+    "hooks:install": "git config core.hooksPath .githooks && chmod +x .githooks/pre-commit",
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "Marwan Sultan",
