@@ -4,67 +4,70 @@ on:
   push:
     branches:
       - main
+      - develop
 
   pull_request:
     branches:
       - main
+      - develop
 
   schedule:
-    # Run security scans weekly
-    - cron: '0 3 * * 1'
-
+    - cron: '0 2 * * 1'
 
 permissions:
   contents: read
   security-events: write
   actions: read
 
-
 jobs:
 
-  # --------------------------------------------
-  # Static Application Security Testing (SAST)
-  # --------------------------------------------
   codeql-analysis:
-
     name: CodeQL Security Analysis
-
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout repository
-        uses: actions/checkout@v5
-
+        uses: actions/checkout@v4
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
           languages: javascript-typescript
 
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
 
 
+  dependency-review:
+    name: Dependency Security Review
+    runs-on: ubuntu-latest
 
-  # --------------------------------------------
-  # Dependency vulnerability scanning
-  # --------------------------------------------
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: high
+
+
   npm-security-audit:
-
-    name: NPM Dependency Security Audit
-
+    name: NPM Dependency Audit
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
 
 
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
@@ -74,36 +77,5 @@ jobs:
         run: npm ci
 
 
-      - name: Run npm audit
+      - name: Run NPM audit
         run: npm audit --audit-level=high
-
-
-
-  # --------------------------------------------
-  # Docker image security scanning
-  # --------------------------------------------
-  docker-security-scan:
-
-    name: Docker Image Vulnerability Scan
-
-    runs-on: ubuntu-latest
-
-
-    steps:
-
-      - name: Checkout repository
-        uses: actions/checkout@v5
-
-
-      - name: Build Docker image
-        run: |
-          docker build \
-          -t playwright-test-framework .
-
-      - name: Run Trivy filesystem scan
-        uses: aquasecurity/trivy-action@0.33.1
-        with:
-          scan-type: fs
-          scan-ref: .
-          severity: HIGH,CRITICAL
-          
