@@ -100,10 +100,10 @@ jobs:
           docker build \
           -t playwright-test-framework .
 
-
-      - name: Run Trivy scan
-        uses: aquasecurity/trivy-action@master
+      - name: Run Trivy filesystem scan
+        uses: aquasecurity/trivy-action@0.33.1
         with:
-          image-ref: playwright-test-framework
+          scan-type: fs
+          scan-ref: .
           severity: HIGH,CRITICAL
-          exit-code: 1
+          exit-code: '1'

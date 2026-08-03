@@ -398,21 +398,21 @@ Potential enterprise improvements:
 
 Contributions should follow enterprise development practices:
 
-1. Create a feature branch
+1. Create a feature branch:
 
-```bash
-git checkout -b feature/new-capability
-```
+   ```bash
+   git checkout -b feature/new-capability
+   ```
 
-2. Implement changes
+2. Implement changes.
 
 3. Run validation:
 
-```bash
-npm run validate
-```
+   ```bash
+   npm run validate
+   ```
 
-4. Submit a pull request
+4. Submit a pull request.
 
 All changes should pass:
 
