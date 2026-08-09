@@ -21,7 +21,7 @@
     "@playwright/test": "^1.62.1",
     "@types/node": "^26.1.2",
     "@typescript-eslint/eslint-plugin": "^8.35.0",
-    "@typescript-eslint/parser": "^8.35.0",
+    "@typescript-eslint/parser": "^8.66.0",
     "eslint": "^9.14.0",
     "husky": "^9.1.7",
     "ts-node": "^10.9.2",
